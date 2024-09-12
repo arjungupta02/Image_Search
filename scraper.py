@@ -21,16 +21,21 @@ if search:
     # page = requests.get(f'https://unsplash.com/s/photos/{keyword}')
     page = urlopen(f'https://unsplash.com/s/photos/{keyword}',context= context).read()
     soup = BeautifulSoup(page,'html.parser')
-    rows = soup.find_all('div',class_ = 'bugb2')
+    # rows = soup.find_all('div',class_ = 'bugb2')
     
-    for row in rows:
-        figures = row.find_all('figure',recursive = False)
+    img = soup.find_all('img',srcset = True,sizes = True)
 
-        for figure in figures:
-            img = figure.find_all('img',srcset = True,sizes = True)
+    for i in img:
+        image_set.add(i['srcset'].split(',')[2].strip())
 
-            for i in img:
-                image_set.add(i['srcset'].split(',')[2].strip())
+    # for row in rows:
+    #     figures = row.find_all('figure',recursive = False)
+
+    #     for figure in figures:
+    #         img = figure.find_all('img',srcset = True,sizes = True)
+
+    #         for i in img:
+    #             image_set.add(i['srcset'].split(',')[2].strip())
 
     placeholder = st.empty()
     col1,col2,col3= placeholder.columns(3)
