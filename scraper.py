@@ -5,8 +5,13 @@ import ssl
 from urllib.request import urlopen
 # div:bugb2->figure->imgsrc:SpgDA
 # imgsrc: https://plus.unsplash.com/premium_photo-1713110640802-28de8804e163
+# https://www.webfx.com/tools/emoji-cheat-sheet/
+
+st.set_page_config(page_title="Download Images",page_icon=":camping:",layout="wide")
 
 st.markdown("<h1 style='text-align: center;'>Search Images</h1>",unsafe_allow_html=True)
+
+
 
 if 'image_set' not in st.session_state:
     st.session_state.image_set = set()
@@ -21,6 +26,8 @@ with st.form("Search"):
     print(keyword)
 
 if search:
+    st.session_state.image_set.clear()
+    st.session_state.image_dict.clear()
     page = urlopen(f'https://unsplash.com/s/photos/{keyword}',context= context).read()
     soup = BeautifulSoup(page,'html.parser')
     # rows = soup.find_all('div',class_ = 'bugb2')
@@ -42,17 +49,10 @@ if search:
         #             image_set.add(i['srcset'].split(',')[2].strip())
 
 placeholder = st.empty()
-col1,col2,col3= placeholder.columns(3)
+columns= placeholder.columns(4)
 
 image_list = list(st.session_state.image_set)
-
 for index, image_ in enumerate(image_list):
-    if index % 3 == 0:
-        col3.image(image_)
-        col3.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
-    elif index % 2 == 0:
-        col2.image(image_)
-        col2.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
-    else:
-        col1.image(image_)
-        col1.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
+    col = columns[index % 4]  # Cycle through the four columns
+    col.image(image_)
+    col.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
