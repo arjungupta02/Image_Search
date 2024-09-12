@@ -54,5 +54,6 @@ columns= placeholder.columns(4)
 image_list = list(st.session_state.image_set)
 for index, image_ in enumerate(image_list):
     col = columns[index % 4]  # Cycle through the four columns
-    col.image(image_)
-    col.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
+    # col.image(image_)
+    # col.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
+    col.markdown(f"<a href='{st.session_state.image_dict[image_]}' target='_blank'><img src='{image_}' style='max-width: 100%;'/></a>", unsafe_allow_html=True)
