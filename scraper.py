@@ -20,7 +20,7 @@ with st.form("Search"):
 if search:
     # page = requests.get(f'https://unsplash.com/s/photos/{keyword}')
     page = urlopen(f'https://unsplash.com/s/photos/{keyword}',context= context).read()
-    soup = BeautifulSoup(page,'lxml')
+    soup = BeautifulSoup(page,'html.parser')
     rows = soup.find_all('div',class_ = 'bugb2')
     
     for row in rows:
