@@ -1,9 +1,8 @@
 import streamlit as st
 from bs4 import BeautifulSoup
-
+# import requests
 import ssl
 from urllib.request import urlopen
-import webbrowser
 # div:bugb2->figure->imgsrc:SpgDA
 # imgsrc: https://plus.unsplash.com/premium_photo-1713110640802-28de8804e163
 
@@ -46,22 +45,14 @@ placeholder = st.empty()
 col1,col2,col3= placeholder.columns(3)
 
 image_list = list(st.session_state.image_set)
-for index,image_ in enumerate(image_list):
+
+for index, image_ in enumerate(image_list):
     if index % 3 == 0:
         col3.image(image_)
-        btn = col3.button("Download",key = index)
-        if btn:
-            webbrowser.open_new_tab(st.session_state.image_dict[image_])
-
+        col3.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
     elif index % 2 == 0:
         col2.image(image_)
-        btn = col2.button("Download",key = index)
-        if btn:
-            webbrowser.open_new_tab(st.session_state.image_dict[image_])
-
+        col2.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
     else:
         col1.image(image_)
-        btn = col1.button("Download",key = index)
-        if btn:
-            webbrowser.open_new_tab(st.session_state.image_dict[image_])
-
+        col1.markdown(f"[Download]({st.session_state.image_dict[image_]})", unsafe_allow_html=True)
