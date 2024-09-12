@@ -36,8 +36,8 @@ if search:
 
 
     for i in img:
-        st.session_state.image_set.add(i['srcset'].split(',')[2].strip())
-        st.session_state.image_dict[i['srcset'].split(',')[2].strip()] = i['srcset'].split('?')[0].strip()
+        st.session_state.image_set.add(i['srcset'].split(',')[3].strip())
+        st.session_state.image_dict[i['srcset'].split(',')[3].strip()] = i['srcset'].split('?')[0].strip()
 
         # for row in rows:
         #     figures = row.find_all('figure',recursive = False)
