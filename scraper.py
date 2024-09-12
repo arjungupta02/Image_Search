@@ -7,7 +7,7 @@ from urllib.request import urlopen
 # div:bugb2->figure->imgsrc:SpgDA
 # imgsrc: https://plus.unsplash.com/premium_photo-1713110640802-28de8804e163
 
-st.markdown("<h1 style='text-align: center;'>Image Scraper</h1>",unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Search Images</h1>",unsafe_allow_html=True)
 
 image_set = set()
 
